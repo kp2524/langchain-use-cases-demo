@@ -28,11 +28,12 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Add CSS to show hint next to sidebar toggle icon
+# Add CSS to show hint next to sidebar toggle icon (only in sidebar header)
 st.markdown("""
 <style>
-/* Add text next to the Material icon in sidebar toggle */
-span[data-testid="stIconMaterial"]::after {
+/* Add text next to the Material icon in sidebar toggle button only */
+section[data-testid="stSidebar"] button span[data-testid="stIconMaterial"]::after,
+section[data-testid="stSidebar"] header button span[data-testid="stIconMaterial"]::after {
     content: " Click to change use case";
     color: #1f77b4;
     font-size: 13px;
@@ -44,14 +45,14 @@ span[data-testid="stIconMaterial"]::after {
 }
 
 /* Dark theme override */
-[data-theme="dark"] span[data-testid="stIconMaterial"]::after,
-.stApp[data-theme="dark"] span[data-testid="stIconMaterial"]::after {
+[data-theme="dark"] section[data-testid="stSidebar"] button span[data-testid="stIconMaterial"]::after,
+[data-theme="dark"] section[data-testid="stSidebar"] header button span[data-testid="stIconMaterial"]::after {
     color: #4fc3f7;
 }
 
 /* Light theme */
-[data-theme="light"] span[data-testid="stIconMaterial"]::after,
-.stApp[data-theme="light"] span[data-testid="stIconMaterial"]::after {
+[data-theme="light"] section[data-testid="stSidebar"] button span[data-testid="stIconMaterial"]::after,
+[data-theme="light"] section[data-testid="stSidebar"] header button span[data-testid="stIconMaterial"]::after {
     color: #1976d2;
 }
 </style>
