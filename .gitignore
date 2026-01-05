@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.env
+*.db
+*.sqlite
+chroma_db/
+.DS_Store
+*.log
+
