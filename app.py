@@ -28,35 +28,37 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Add CSS to show hint next to sidebar toggle icon (only in sidebar header)
+# Add CSS to show hint next to sidebar toggle icon on main page
 st.markdown("""
 <style>
-/* Add text next to the Material icon in sidebar toggle button only */
-section[data-testid="stSidebar"] button span[data-testid="stIconMaterial"]::after,
-section[data-testid="stSidebar"] header button span[data-testid="stIconMaterial"]::after {
-    content: " Click to change use case";
-    color: #1f77b4;
-    font-size: 13px;
-    font-weight: 600;
-    margin-left: 8px;
-    white-space: nowrap;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    display: inline-block;
+/* Target toggle button on main page (when sidebar is closed) */
+.stApp button:first-of-type span[data-testid="stIconMaterial"]::after {
+    content: " Click to change use case" !important;
+    color: #1f77b4 !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    margin-left: 6px !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
+    line-height: 1.5 !important;
 }
 
-/* Dark theme override */
-[data-theme="dark"] section[data-testid="stSidebar"] button span[data-testid="stIconMaterial"]::after,
-[data-theme="dark"] section[data-testid="stSidebar"] header button span[data-testid="stIconMaterial"]::after {
-    color: #4fc3f7;
+/* Exclude from sidebar */
+section[data-testid="stSidebar"] button span[data-testid="stIconMaterial"]::after {
+    content: none !important;
 }
 
-/* Light theme */
-[data-theme="light"] section[data-testid="stSidebar"] button span[data-testid="stIconMaterial"]::after,
-[data-theme="light"] section[data-testid="stSidebar"] header button span[data-testid="stIconMaterial"]::after {
-    color: #1976d2;
+/* Theme-specific colors */
+[data-theme="dark"] .stApp button:first-of-type span[data-testid="stIconMaterial"]::after {
+    color: #4fc3f7 !important;
+}
+[data-theme="light"] .stApp button:first-of-type span[data-testid="stIconMaterial"]::after {
+    color: #1976d2 !important;
 }
 </style>
 """, unsafe_allow_html=True)
+
 
 # Initialize session state
 if "chat_memory" not in st.session_state:
@@ -174,30 +176,6 @@ def main():
     
     # Sidebar
     with st.sidebar:
-        # Add clickable indicator at the very top of sidebar (where >> toggle appears)
-        st.markdown("""
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <style>
-        .sidebar-toggle-hint {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 15px;
-            padding: 8px 12px;
-            background-color: rgba(250, 250, 250, 0.05);
-            border-radius: 5px;
-            border-left: 3px solid rgba(250, 250, 250, 0.3);
-        }
-        .sidebar-toggle-hint:hover {
-            background-color: rgba(250, 250, 250, 0.1);
-        }
-        </style>
-        <div class="sidebar-toggle-hint">
-            <span class="material-icons" style="color: rgba(250, 250, 250, 0.6); font-size: 18px;">keyboard_double_arrow_right</span>
-            <span style="color: rgba(250, 250, 250, 0.8); font-size: 13px;">Click to change use case</span>
-        </div>
-        """, unsafe_allow_html=True)
-        
         st.header("📋 Select Use Case")
         st.markdown("**👇 Click below to switch between different use cases:**")
         st.markdown("")
