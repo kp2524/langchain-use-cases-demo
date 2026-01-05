@@ -145,12 +145,16 @@ def main():
     # Sidebar
     with st.sidebar:
         st.header("📋 Select Use Case")
+        st.markdown("**👇 Click below to switch between different use cases:**")
+        st.markdown("")
         selected = st.radio(
-            "Choose a use case:",
+            "Available Use Cases:",
             options=list(USE_CASES.keys()),
-            format_func=lambda x: USE_CASES[x]["title"],
+            format_func=lambda x: f"{USE_CASES[x]['icon']} {USE_CASES[x]['title']}",
             label_visibility="visible"
         )
+        st.markdown("")
+        st.caption("💡 Select any use case above to explore its capabilities")
     
     # Main content
     col1, col2 = st.columns([2, 1])
