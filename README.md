@@ -3,29 +3,31 @@ title: LangChain Use Cases Demo
 emoji: 🤖
 colorFrom: blue
 colorTo: purple
-sdk: docker
-pinned: false
 ---
 
 # LangChain Use Cases Demo
 
-Interactive demonstration of 8 LangChain use cases powered by Groq AI:
+Interactive demonstration of 8 LangChain use cases powered by Groq AI.
 
-1. **💬 AI-Powered Chatbots** - Context-aware conversations
-2. **📄 Document Question Answering** - Ask questions about documents
-3. **🔍 RAG (Retrieval-Augmented Generation)** - Knowledge base queries
-4. **📝 Document Summarization** - Automatic text summarization
-5. **📊 Data Extraction** - Extract structured data from text
-6. **✍️ Content Generation** - Generate context-aware content
-7. **⚙️ Workflow Automation** - Multi-step AI workflows
-8. **🛠️ Custom AI Tools** - Specialized AI-powered tools
+## 🎯 Features
+
+1. **💬 AI-Powered Chatbots** - Context-aware conversations with memory
+2. **📄 Document Question Answering** - Ask questions about PDF, DOCX, and TXT files
+3. **🔍 RAG (Retrieval-Augmented Generation)** - Knowledge base queries with citations
+4. **📝 Document Summarization** - Automatic text summarization (short/medium/long)
+5. **📊 Data Extraction** - Extract structured JSON from unstructured text
+6. **✍️ Content Generation** - Generate context-aware content (emails, blogs, social media)
+7. **⚙️ Workflow Automation** - Multi-step AI workflow demonstrations
+8. **🛠️ Custom AI Tools** - Calculator, code generator, and text analyzer
 
 ## 🚀 Quick Start
 
 ### Local Testing
 
-1. **Install dependencies:**
+1. **Clone and setup:**
    ```bash
+   git clone https://github.com/kp2524/langchain-use-cases-demo.git
+   cd langchain-use-cases-demo
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    pip install -r requirements.txt
@@ -36,52 +38,41 @@ Interactive demonstration of 8 LangChain use cases powered by Groq AI:
    - Sign up (free)
    - Create API key
 
-3. **Run the app:**
+3. **Set API key in code:**
+   - Open `app.py`
+   - Line 17: Replace with your API key or set as environment variable
+
+4. **Run the app:**
    ```bash
    streamlit run app.py
    ```
 
-4. **Enter your API key in the sidebar and start exploring!**
+### Deploy to Streamlit Community Cloud
 
-### Deploy to Hugging Face Spaces (Docker)
+1. **Push code to GitHub** (already done if you cloned from here)
 
-1. **Push this code to a GitHub repository:**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git remote add origin YOUR_GITHUB_REPO_URL
-   git push -u origin main
+2. **Deploy on Streamlit:**
+   - Go to [share.streamlit.io](https://share.streamlit.io)
+   - Sign in with GitHub
+   - Click "New app"
+   - Select repository: `kp2524/langchain-use-cases-demo`
+   - Main file: `app.py`
+   - Branch: `main`
+
+3. **Add API key as secret:**
+   - In app settings, go to "Secrets"
+   - Add in TOML format:
+     ```toml
+     GROQ_API_KEY = "your-groq-api-key-here"
+     ```
+   - Save and deploy
+
+4. **Your app will be live at:**
+   ```
+   https://YOUR_APP_NAME.streamlit.app
    ```
 
-2. **Create Hugging Face Space:**
-   - Go to [huggingface.co/spaces](https://huggingface.co/spaces)
-   - Click "Create new Space"
-   - Space name: `langchain-use-cases-demo` (or your choice)
-   - SDK: **Docker** (select Docker, not Streamlit)
-   - Visibility: Public or Private
-   - Click "Create Space"
-
-3. **Connect GitHub repository:**
-   - In Space Settings → Repository
-   - Click "Import from GitHub" or manually upload files
-   - Make sure `Dockerfile`, `app.py`, `requirements.txt`, and `README.md` are included
-
-4. **Add API key as secret:**
-   - Go to Space Settings → Secrets
-   - Add new secret:
-     - Key: `GROQ_API_KEY`
-     - Value: Your Groq API key
-   - Save
-
-5. **Deploy:**
-   - The Space will automatically build and deploy
-   - Check build logs if there are any issues
-   - Your app will be live at: `https://huggingface.co/spaces/YOUR_USERNAME/SPACE_NAME`
-
-**Note:** The Dockerfile is included in this repo and will automatically be used for deployment.
-
-## 🛠️ Technology
+## 🛠️ Technology Stack
 
 - **LangChain** - AI agent framework
 - **Groq** - Ultra-fast AI inference (free tier available)
@@ -89,7 +80,50 @@ Interactive demonstration of 8 LangChain use cases powered by Groq AI:
 - **ChromaDB** - Vector database
 - **Streamlit** - Interactive UI
 
-## 📝 Note
+## 📋 Requirements
 
-This app requires a Groq API key (free to get). The key is stored only in your session and never saved.
+- Python 3.11+
+- Groq API key (free at [console.groq.com](https://console.groq.com))
+- Internet connection (for downloading embeddings models)
 
+## 📝 File Structure
+
+```
+langchain-use-cases-demo/
+├── app.py              # Main Streamlit application
+├── requirements.txt   # Python dependencies
+├── README.md          # This file
+├── .gitignore         # Git ignore rules
+└── run.sh             # Quick start script (optional)
+```
+
+## 🔑 API Key Setup
+
+The app reads the API key from environment variable `GROQ_API_KEY`. 
+
+**For local development:**
+- Set in code (line 17 of app.py) or
+- Export: `export GROQ_API_KEY="your-key"`
+
+**For Streamlit Cloud:**
+- Add as secret in TOML format (see deployment steps above)
+
+## 🎓 Use Cases Explained
+
+Each use case demonstrates a different LangChain capability:
+- **Chatbot**: Conversation memory and context management
+- **Document QA**: Vector stores and retrieval chains
+- **RAG**: Knowledge base construction and querying
+- **Summarization**: Text processing and LLM chains
+- **Data Extraction**: Structured output parsing
+- **Content Generation**: Prompt templates and context injection
+- **Workflow Automation**: Multi-step agent workflows
+- **Custom Tools**: Tool creation and agent integration
+
+## 📄 License
+
+This project is open source and available for educational purposes.
+
+## 🙏 Credits
+
+Built with LangChain, Groq, and Streamlit.
